@@ -7,7 +7,7 @@ const errorController = require('./controllers/errorController');
 //セッションの設定
 const session = require('express-session');
 app.use(session({
-    secret: 'mysecret',
+    secret:  process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {
