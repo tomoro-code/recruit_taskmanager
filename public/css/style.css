@@ -1,0 +1,207 @@
+@charset 'utf-8';
+
+body{
+    margin: 0;
+    background-color: white;  
+}
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 100%;
+    border: #add8e6 solid 2px;
+}
+
+button{
+    border: #add8e6 solid 1px;
+    border-radius: 10px;
+    color: #add8e6;
+    background-color: white;
+}
+
+li{
+    list-style-type: none;
+}
+
+input, textarea, select{
+    border: #add8e6 1px solid;
+}
+
+.box_template{
+    width: 60%;
+    border: #add8e6 3px solid;
+    border-radius: 20px;
+}
+
+.page_title{
+    color: #add8e6;
+    text-decoration: underline;
+    text-align: center;
+    margin: 0;
+    margin: 92px 0 50px;
+}
+
+.form_area{
+    color: #add8e6;
+    text-align: center;
+    width: 60%;
+    margin: 0 auto 30px;
+    border: #add8e6 2px solid;
+    border-radius: 20px;
+}
+
+.button_area{
+    text-align: center;
+}
+
+.mouseover{
+    background-color: #add8e6;
+    color: white;
+}
+.mouseover h1{
+    color: white;
+}
+
+.guide_area{
+    text-align: center;
+    margin: 0 0 20px;
+}
+.complete_color{
+    background-color: #add8e6;
+    width: 12px;
+}
+.uncomplete_color{
+    background-color: white;
+    border: #add8e6 0.5px solid;
+    width: 12px;
+}
+
+.guide_h1, .guide_h1 a{
+    color: #add8e6;
+}
+
+/* レイアウトページ */
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #add8e6;
+    width: 100%;
+    height: 56px;
+    position: fixed; top: 0; left: 0;
+}
+#menuTrigger{
+    flex-basis: 25%;
+    color: white;
+}
+#logout{
+    flex-basis: 25%;
+    text-align: end;
+    color: white;
+}
+header span{
+    margin: 16px 0 16px;
+}
+#login, #signup, #dropdownTrigger{
+    color: white;
+}
+#menu{
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+.menu_item{
+    text-align: center;
+    color: white;
+    background-color: #add8e6;
+    flex-basis: 30%;
+    border-radius: 20px;
+}
+.open{
+    position: fixed; top: 58px; left: 0;
+    width: 100%;
+    height: 24px;
+    overflow: hidden;
+    transition: height .5s;
+}
+.close{
+    position: fixed; top: 58px; left: 0;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    transition: height .5s;
+}
+.flash_area{
+    background-color: white;
+    color: #add8e6;
+    margin: 92px 0 0;
+}
+
+/* topページ */
+.instruction{
+    text-align: center;
+}
+.instruction p{
+    color: #add8e6;
+}
+
+/* homeページ */
+.entry_company{
+    margin: 25px auto;
+}
+.company_name{
+    margin: 0;
+    color: #add8e6;
+}
+
+/* progressページ newtasksページ */
+.completed{
+    background-color: #add8e6;
+    color: white;
+}
+.uncompleted{
+    background-color: white;
+    color: #add8e6;
+}
+
+.task_container{
+    margin-bottom: 100px;
+}
+
+.task_contents{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.task_header{
+    flex-basis: 50%;
+    overflow: auto;
+}
+
+.due_date{
+    flex-basis: 25%;
+}
+.iscompleted{
+    flex-basis: 15%;
+}
+
+.return_area{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/*configページ*/
+.config_title{
+    text-align: center;
+    color: #add8e6;
+}
+.user_info{
+    display: flex;
+}
+.currentuser_info{
+    flex-basis: 50%;
+    padding: 0 0 0 200px;
+}
+.user_info_modify{
+    flex-basis: 50%;
+}

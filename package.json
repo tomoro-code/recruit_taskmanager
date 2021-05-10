@@ -1,0 +1,23 @@
+{
+  "name": "recruit_taskmanager",
+  "version": "1.0.0",
+  "description": "an application which helps you manage the tasks thoroughout job hunting",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomoro Omata",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "http-status-codes": "^2.1.4",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1"
+  }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>就活タスクマネージャー</title>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+</head>
+<header>
+    <% if(locals.username){ %>
+        <p id="dropdownTrigger">メニュー</p><a href="/logout"><p id="logout">ログアウト</p></a>
+    <% }else{ %>
+        <span><a href="/login" id="login">ログイン</a>　<a href="/signup" id="signup">新規登録</a></span>
+    <% } %>
+</header>
+<div id="dropdown" class="close">
+    <ul id="menu">
+        <a href="/home" class="menu_item"><li>エントリー企業一覧</li></a>
+        <a href="/alltasks" class="menu_item"><li>全タスク</li></a>
+        <a href="/config" class="menu_item"><li>設定</li></a>
+    </ul>
+</div>
+<div class="flash_area">
+    <% if(locals.flashMessage){ %>
+        <% if(locals.flashMessage.success){ %>
+            <div class="flash_success">
+                <%= locals.flashMessage.success %>
+            </div>
+        <% }else if(locals.flashMessage.error){ %>
+            <div class="flash_error">
+                <%= locals.flashMessage.error %>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+<%- body %>
+<script type="text/javascript" src="/js/layout.js"></script>
+</html>

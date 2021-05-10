@@ -1,0 +1,26 @@
+<div class="page_title">
+    <h1>設定</h1>
+</div>
+<h1 class="config_title">ユーザー情報の変更</h1>
+<div class="user_info">
+    <div class="currentuser_info">
+        <h2>現在のユーザーネーム</h2>
+        <p><%= locals.username %></p>
+        <h2>現在のパスワード</h2>
+        <p>セキュリティ上の理由で表示していません。</p>
+    </div>
+    <div class="user_info_modify">
+        <form action="/modifyusername?_method=PUT" method="POST" data-title="ユーザーネーム" onsubmit="return beforeSubmit()">
+            <h2>ユーザーネーム変更</h2>
+            <input id="usernameInput" type="text" name="username" placeholder="新ユーザーネーム" required>
+            <button type="submit">変更する</button>
+        </form>
+        <form action="/modifypassword?_method=PUT" method="POST" data-title="パスワード" onsubmit="return beforeSubmit()"> 
+            <h2>パスワード変更</h2>
+            <input id="passwordInput" type="password" name="password" placeholder="新パスワード" required>
+            <input id="passwordCheckInput" type="password" name="passwordCheck" placeholder="確認用パスワード（同じパスワードを入力）" required>
+            <button type="submit">変更する</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/js/config.js"></script>

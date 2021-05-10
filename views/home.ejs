@@ -1,0 +1,18 @@
+<div class="page_title">
+    <h1><%= locals.username %>さんのエントリー企業一覧</h1>
+</div>
+<% if(locals.entries.length >= 1){ %>
+    <% locals.entries.forEach((entry) => { %>
+        <div class="entry_company box_template">
+            <a href="/progress/<%= entry.company_id %>">
+                <h1 class="company_name">
+                    <%= entry.company_name %>
+                </h1>
+            </a>
+        </div>
+    <% }); %>
+<% } %>
+<div class="entry_company box_template">
+    <a href="/newcompany"><h1 class="company_name">エントリー企業を追加</h1></a>
+</div>
+<script type="text/javascript" src="/js/home.js"></script>

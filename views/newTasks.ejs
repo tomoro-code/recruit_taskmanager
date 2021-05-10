@@ -1,0 +1,51 @@
+<div class="page_title">
+    <h1><%= locals.companyName %></h1>
+</div>
+
+<% if(locals.tasks){ %>
+    <% locals.tasks.forEach((task) => { %>
+        <div class="task_container">
+            <div class="task_display_area">
+                <div class="task_contents box_template uncompleted">
+                    <div class="task_header">
+                        <h1><%= task.ordernum %>: <%= task.task_title %></h1>
+                        <span><%= task.note %></span>
+                    </div>
+                    <div class="due_date">
+                        <span><%= task.due_date %></span>
+                    </div>
+                    <div class="iscompleted">
+                        <span><%= task.completed %></span>                    
+                    </div>
+                </div>
+            </div>
+            <div class="button_area">
+                <a href="/deletenewtask/<%= task.company_id %>/<%= task.task_id %>?_method=DELETE"><button><%= task.task_title %>を削除</button></a>    
+            </div>
+        </div>
+    <% }); %>
+<% } %>
+<div class="form_area">
+    <form action="/newtasks/<%= locals.companyId %>" method="POST">
+        <input type="text" name="taskTitle" placeholder="選考内容（必須）" required>
+        <input type="datetime-local" name="dueDate">
+        <textarea name="note" placeholder="備考" rows="5"></textarea>
+        <label for="orderNum">優先度・順番</label>
+        <select name="orderNum">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+        </select>
+        <button type="submit">タスクを追加</button>
+    </form>
+</div>
+<div class="button_area">
+    <a href="/home"><button type="button">全て完了</button></a>
+</div>

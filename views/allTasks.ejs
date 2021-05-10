@@ -1,0 +1,47 @@
+<div class="page_title">
+    <h1><%= locals.username %>さんの全タスク</h1>
+</div>
+<div class="guide_area">
+    <span class="complete_color">　　</span><span>：完了済み　　</span><span class="uncomplete_color">　　</span><span>：未完了　　</span>
+</div>
+<% if(locals.tasks.length >= 1){ %>
+    <% locals.tasks.forEach((task) => { %>
+        <div class="task_container">
+            <% if(task.completed === '完了！'){ %>
+                <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=alltasks&_method=PUT">
+                    <div class="task_desplay_area">    
+                        <div class="task_contents box_template completed">
+            <% }else{ %>
+                <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=alltasks&_method=PUT">
+                    <div class="task_desplay_area">    
+                        <div class="task_contents box_template uncompleted">
+            <% } %>      
+                            <div class="task_header">
+                                <span><%= task.company_name %></span>
+                                <h1><%= task.ordernum %>: <%= task.task_title %></h1>
+                                <span><%= task.note %></span>
+                            </div>
+                            <div class="due_date">
+                                <span>
+                                    期日：<br>
+                                    <%= task.due_date %>
+                                </span>
+                            </div>
+                            <div class="iscompleted">
+                                <span>進捗：<br>
+                                    <%= task.completed %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="button_area">
+                    <a href="/editTask/<%= task.company_id %>/<%= task.task_id %>?from=alltasks"><button>この項目を編集</button></a>
+                    <a href="/deletetask/<%= task.company_id %>/<%= task.task_id %>?from=alltasks&_method=DELETE"><button>この項目を削除</button></a>
+                </div>
+        </div>
+    <% }); %>
+<% }else{ %>
+    <h1 class="guide_h1">登録されたタスクがありません。→<a href="/newcompany">こちら</a>←から登録できます。</h1>
+<% } %>
+        

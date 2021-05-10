@@ -1,0 +1,77 @@
+<div class="page_title">
+    <h1 class="company_name"><%= locals.companyName %></h1>
+    <div class="button_area">
+        <a href="/progress/editcompanyname/<%= locals.companyId %>">
+            <button>企業名を編集</button>
+        </a>
+        <!--<a href="/deletealldata/<%= locals.companyId %>?_method=DELETE"> -->
+            <button id="deleteButton" data-path="/deletealldata/<%= locals.companyId %>?_method=DELETE">選考内容を含むこの企業のデータを全て消去</button>
+        <!--</a>-->
+    </div>
+</div>
+<div class="guide_area">
+    <span class="complete_color">　　</span><span>：完了済み　　</span><span class="uncomplete_color">　　</span><span>：未完了　　</span>
+</div>
+<% if(locals.tasks.length >= 1){ %>
+    <% locals.tasks.forEach((task) => { %>
+        <div class="task_container">
+            <% if(task.completed === '完了！'){ %>
+                <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">
+                    <div class="task_desplay_area">    
+                        <div class="task_contents box_template completed">
+            <% }else{ %>
+                <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">
+                    <div class="task_desplay_area">    
+                        <div class="task_contents box_template uncompleted">
+            <% } %>      
+                            <div class="task_header">
+                                <h1><%= task.ordernum %>: <%= task.task_title %></h1>
+                                <span><%= task.note %></span>
+                            </div>
+                            <div class="due_date">
+                                <span>
+                                    期日：<br>
+                                    <%= task.due_date %>
+                                </span>
+                            </div>
+                            <div class="iscompleted">
+                                <span>進捗：<br>
+                                    <%= task.completed %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="button_area">
+                    <a href="/editTask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>"><button>この項目を編集</button></a>
+                    <a href="/deletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=DELETE"><button>この項目を削除</button></a>
+                </div>
+        </div>
+    <% }); %>
+<% } %> 
+<div class="form_area">
+    <h2>タスクを追加</h2>
+    <form action="/progress/addtask/<%= locals.companyId %>" method="POST">
+        <input type="text" name="taskTitle" placeholder="選考内容（必須）" required>
+        <input type="datetime-local" name="dueDate">
+        <textarea name="note" placeholder="備考"></textarea>
+        <label for="orderNum">優先度・順番</label>
+        <select name="orderNum">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+        </select>
+        <button type="submit">タスクを追加</button>
+    </form>
+</div>
+<div class="return_area">
+    <a href="/home"><button type="button">戻る</button></a>
+</div>
+<script type="text/javascript" src="/js/progress.js"></script>
