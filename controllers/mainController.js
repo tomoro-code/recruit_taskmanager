@@ -1,10 +1,10 @@
 //データベースの接続
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Tomorrow79',
-    database: 'recruit_taskmanager'
+    host: 'us-cdbr-east-03.cleardb.com',
+    user: 'bf0389898985ce',
+    password: '91e3e891',
+    database: 'heroku_9153d210a1d5aa6'
 });
 connection.connect((error) => {
     if(error){
