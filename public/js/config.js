@@ -3,6 +3,7 @@ function beforeSubmit(e){
     if(result){
         return true;
     }else{
+        window.alert('キャンセルされました。');
         return false;
     }
 }
