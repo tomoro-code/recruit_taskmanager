@@ -1,18 +1,40 @@
 //データベースの接続
 const mysql = require('mysql');
-const connection = mysql.createConnection({
+const dbConfig = {
     host: 'us-cdbr-east-03.cleardb.com',
     user: 'bf0389898985ce',
     password: '91e3e891',
     database: 'heroku_9153d210a1d5aa6'
-});
-connection.connect((error) => {
-    if(error){
-        console.log(error.stack);
-        return;
-    }
-    console.log('the connection to mySQL has been succeed!');
-});
+};
+
+let connection;
+
+function handleDisconnect(){
+    console.log('connecting to database...');
+    connection = mysql.createConnection(dbConfig); //接続or再接続
+
+    connection.connect((error) => {
+        if(error){
+            console.log('error occurred when connecting to database:', error);
+            setTimeout(handleDisconnect, 1000) //エラーが生じたら1秒後に再接続を試みる
+        }else{
+            console.log('the connection to mySQL has been succeed!');
+        }
+    });
+
+    connection.on('error', (error) => {
+        console.log('database error:', error);
+        if(error.code === 'PROTOCOL_CONNECTION_LOST'){
+            handleDisconnect();
+        }else{
+            throw error;
+        }
+    });
+}
+
+handleDisconnect();
+
+
 
 const bcrypt = require('bcrypt');
 
@@ -95,7 +117,7 @@ module.exports = {
                     });
                 }
             }
-        )
+        );
    },
     getHomePage: (req, res) => {
         connection.query(
