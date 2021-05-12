@@ -2,8 +2,8 @@
 const mysql = require('mysql');
 const dbConfig = {
     host: 'us-cdbr-east-03.cleardb.com',
-    user: 'bf0389898985ce',
-    password: '91e3e891',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     database: 'heroku_9153d210a1d5aa6'
 };
 
