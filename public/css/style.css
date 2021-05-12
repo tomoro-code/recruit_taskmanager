@@ -66,6 +66,7 @@ input, textarea, select{
 .guide_area{
     text-align: center;
     margin: 0 0 20px;
+    color: #add8e6;
 }
 .complete_color{
     background-color: #add8e6;
@@ -79,6 +80,7 @@ input, textarea, select{
 
 .guide_h1, .guide_h1 a{
     color: #add8e6;
+    text-align: center;
 }
 
 /* レイアウトページ */
