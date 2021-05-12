@@ -85,39 +85,44 @@ module.exports = {
         res.render('signup');
     },
     signup: (req, res) => {
-        connection.query(
-            'SELECT * FROM users WHERE username = ?',
-            [req.body.username],
-            (error, results) => {
-                if(error){
-                    console.log(error.stack);
-                    req.flash('error', 'エラーが生じました');
-                    res.redirect('/signup');
-                }else if(results.length >= 1){
-                    req.flash('error', 'すでに同じ名前のユーザーがいます。違う名前で登録してください。');
-                    res.redirect('/signup');
-                }else{
-                    bcrypt.hash(req.body.password, 5, (error, hash) => {
-                        if(error){
-                            console.log(error.stack);
-                            req.flash('error', 'パスワード暗号化にエラーが生じました。もう一度お試しください');
-                            res.redirect('/signup');
-                        }else{
-                            connection.query(
-                                'INSERT INTO users (username, password) VALUES (?, ?)',
-                                [req.body.username, hash],
-                                (error, results) => {
-                                    req.session.userId = results.insertId;
-                                    req.session.username = req.body.username;
-                                    req.flash('success', `ようこそ、${req.session.username}さん`);
-                                    res.redirect('/home');
-                                }
-                            );
-                        }
-                    });
+        if(req.body.username === '' || req.body.password === ''){
+            req.flash('error', '空文字は使用できません。');
+            res.redirect('/signup');
+        }else{
+            connection.query(
+                'SELECT * FROM users WHERE username = ?',
+                [req.body.username],
+                (error, results) => {
+                    if(error){
+                        console.log(error.stack);
+                        req.flash('error', 'エラーが生じました');
+                        res.redirect('/signup');
+                    }else if(results.length >= 1){
+                        req.flash('error', 'すでに同じ名前のユーザーがいます。違う名前で登録してください。');
+                        res.redirect('/signup');
+                    }else{
+                        bcrypt.hash(req.body.password, 5, (error, hash) => {
+                            if(error){
+                                console.log(error.stack);
+                                req.flash('error', 'パスワード暗号化にエラーが生じました。もう一度お試しください');
+                                res.redirect('/signup');
+                            }else{
+                                connection.query(
+                                    'INSERT INTO users (username, password) VALUES (?, ?)',
+                                    [req.body.username, hash],
+                                    (error, results) => {
+                                        req.session.userId = results.insertId;
+                                        req.session.username = req.body.username;
+                                        req.flash('success', `ようこそ、${req.session.username}さん`);
+                                        res.redirect('/home');
+                                    }
+                                );
+                            }
+                        });
+                    }
                 }
-            }
-        );
+            );
+        }
    },
     getHomePage: (req, res) => {
         connection.query(
@@ -472,6 +477,10 @@ module.exports = {
         );
     },
     modifyPassword: (req, res) => {
+        if(req.body.password === ''){
+            req.flash('error', '空文字はつかえません');
+            res.redirect('/config');
+        }
         if(req.body.password === req.body.passwordCheck){
             bcrypt.hash(req.body.password, 5, (error, hash) => {
                 if(error){
