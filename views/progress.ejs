@@ -17,13 +17,13 @@
     <% locals.tasks.forEach((task) => { %>
         <div class="task_container">
             <% if(task.completed === '完了！'){ %>
-                <div class="task_desplay_area box_template">   
+                <div class="task_display_area box_template completed">   
                     <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT"> 
-                        <div class="task_contents completed">
+                        <div class="task_contents">
             <% }else{ %>
-                <div class="task_desplay_area box_template">
+                <div class="task_display_area box_template uncompleted">
                     <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">    
-                        <div class="task_contents uncompleted">
+                        <div class="task_contents">
             <% } %>      
                             <div class="task_header">
                                 <h1><%= task.ordernum %>: <%= task.task_title %></h1>
