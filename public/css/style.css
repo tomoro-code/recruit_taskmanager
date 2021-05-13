@@ -169,16 +169,16 @@ header span{
 .task_container{
     margin-bottom: 100px;
 }
-
-.task_contents{
+.task_display_area{
     margin: 0 auto;
 }
-.task_contents a{
-    display: inline-flex;
+.task_contents{
+    width: 100%;
+    display: flex;
     justify-content: space-between;
 }
 .task_header{
-    flex-basis: 60%;
+    flex-basis: 55%;
     overflow: auto;
 }
 

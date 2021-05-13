@@ -17,14 +17,14 @@
     <% locals.tasks.forEach((task) => { %>
         <div class="task_container">
             <% if(task.completed === '完了！'){ %>
-                <div class="task_desplay_area">   
-                    <div class="task_contents box_template completed">
-                        <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT"> 
+                <div class="task_desplay_area box_template">   
+                    <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT"> 
+                        <div class="task_contents completed">
             <% }else{ %>
-                <div class="task_desplay_area">
-                    <div class="task_contents box_template uncompleted">
-                        <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">    
-                <% } %>      
+                <div class="task_desplay_area box_template">
+                    <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">    
+                        <div class="task_contents uncompleted">
+            <% } %>      
                             <div class="task_header">
                                 <h1><%= task.ordernum %>: <%= task.task_title %></h1>
                                 <span><%= task.note %></span>
@@ -40,8 +40,8 @@
                                     <%= task.completed %>
                                 </span>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="button_area">
                     <a href="/editTask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>"><button>この項目を編集</button></a>
