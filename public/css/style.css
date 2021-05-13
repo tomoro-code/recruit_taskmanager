@@ -161,8 +161,14 @@ header span{
     background-color: #add8e6;
     color: white;
 }
+.completed a{
+    color: white;
+}
 .uncompleted{
     background-color: white;
+    color: #add8e6;
+}
+.umcomleted a{
     color: #add8e6;
 }
 
