@@ -171,9 +171,11 @@ header span{
 }
 
 .task_contents{
-    display: flex;
-    justify-content: space-between;
     margin: 0 auto;
+}
+.task_contents a{
+    display: inline-flex;
+    justify-content: space-between;
 }
 .task_header{
     flex-basis: 50%;
