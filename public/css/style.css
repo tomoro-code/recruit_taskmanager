@@ -178,7 +178,7 @@ header span{
     justify-content: space-between;
 }
 .task_header{
-    flex-basis: 50%;
+    flex-basis: 60%;
     overflow: auto;
 }
 
