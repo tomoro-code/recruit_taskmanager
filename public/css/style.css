@@ -8,18 +8,15 @@ a{
     text-decoration: none;
 }
 
-img{
-    width: 100%;
-    border: #add8e6 solid 2px;
-}
-
 button{
     border: #add8e6 solid 1px;
     border-radius: 10px;
     color: #add8e6;
     background-color: white;
 }
-
+input{
+    border-radius: 10px;
+}
 li{
     list-style-type: none;
 }
@@ -109,6 +106,7 @@ header span{
 }
 #menu{
     margin: 0;
+    padding: 0;
     display: flex;
     justify-content: space-around;
 }
@@ -146,6 +144,25 @@ header span{
 .instruction p{
     color: #add8e6;
 }
+.how_to_use h1{
+    text-align: center;
+}
+
+.steps{
+    width: 60%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: #add8e6 2px solid;
+    border-radius: 15px;
+}
+
+.steps h2{
+    text-align: center;
+}
+
+.steps img{
+    width: 100%;
+}
 
 /* homeページ */
 .entry_company{
@@ -179,20 +196,19 @@ header span{
     margin: 0 auto;
 }
 .task_contents{
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 .task_header{
-    flex-basis: 55%;
+    flex-basis: 50%;
     overflow: auto;
 }
 
 .due_date{
-    flex-basis: 25%;
+    flex-basis: 30%;
 }
 .iscompleted{
-    flex-basis: 15%;
+    flex-basis: 20%;
 }
 
 .return_area{
@@ -214,4 +230,36 @@ header span{
 }
 .user_info_modify{
     flex-basis: 50%;
+}
+
+@media  screen and (max-width: 599px) {
+    h1, p{
+        font-size: 1em;
+    }
+    h2{
+        font-size: 0.8em;
+    }
+    span, label{
+        font-size: 0.8em;
+    }
+    .box_template{
+        width: 70%;
+    }
+    .menu_item{
+        font-size: 0.8em;
+        margin: auto 0;
+    }
+    .open{
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    /* config */
+    .user_info{
+        display: block;
+        padding-left: 50px;
+    }
+    .currentuser_info{
+        padding: 0;
+    }
 }
