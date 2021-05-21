@@ -1,10 +1,10 @@
 //データベースの接続
 const mysql = require('mysql');
 const dbConfig = {
-    host: 'us-cdbr-east-03.cleardb.com',
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: 'heroku_9153d210a1d5aa6'
+    host: /*'us-cdbr-east-03.cleardb.com' || */'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'Tomorrow79',
+    database: /*'heroku_9153d210a1d5aa6' || */'recruit_taskmanager'
 };
 
 let connection;
@@ -138,21 +138,26 @@ module.exports = {
         res.render('newCompany');
     },
     addNewCompany: (req, res) => {
-        connection.query(
-            'INSERT INTO companies (company_name, user_id) VALUES (?, ?)',
-            [req.body.companyName, req.session.userId],
-            (error, results) => {
-                if(error){
-                    console.log(error.stack);
-                    req.flash('error', 'エントリー企業の追加に失敗しました。再度お試しください。');
-                    res.redirect('/home');
-                }else{
-                    let companyId = results.insertId;
-                    req.flash('success', `${req.body.companyName}を追加しました。`);
-                    res.redirect(`/newtasks/${companyId}`);
+        if(req.body.companyName !== ''){
+            connection.query(
+                'INSERT INTO companies (company_name, user_id) VALUES (?, ?)',
+                [req.body.companyName, req.session.userId],
+                (error, results) => {
+                    if(error){
+                        console.log(error.stack);
+                        req.flash('error', 'エントリー企業の追加に失敗しました。再度お試しください。');
+                        res.redirect('/home');
+                    }else{
+                        let companyId = results.insertId;
+                        req.flash('success', `${req.body.companyName}を追加しました。`);
+                        res.redirect(`/newtasks/${companyId}`);
+                    }
                 }
-            }
-        );
+            );
+        }else{
+            req.flash('error', '企業名を入力してください。');
+            res.redirect('/newcompany');
+        }
     },
     getNewTasksPage: (req, res) => {
         connection.query(
@@ -187,25 +192,30 @@ module.exports = {
         );
     },
     addNewTask: (req, res) => {
-        if(req.body.dueDate === ''){
-            res.locals.dueDate = '期日未設定';
-        }else{
-            res.locals.dueDate = req.body.dueDate;
-        }
-        connection.query(
-            'INSERT INTO tasks (task_title, due_date, note, company_id, user_id, ordernum) VALUES (?, ? , ?, ?, ?, ?)',
-            [req.body.taskTitle, res.locals.dueDate, req.body.note, req.params.companyId, req.session.userId, req.body.orderNum],
-            (error, results) => {
-                if(error) {
-                    console.log(error.stack);
-                    req.flash('error', 'タスクの追加に失敗しました');
-                    res.redirect('/home');
-                }else{
-                    req.flash('success', `タスク：${req.body.taskTitle}を追加`);
-                    res.redirect(`/newtasks/${req.params.companyId}`);
-                }
+        if(req.body.taskTitle !== ''){
+            if(req.body.dueDate === ''){
+                res.locals.dueDate = '期日未設定';
+            }else{
+                res.locals.dueDate = req.body.dueDate.replace('T', '　');
             }
-        );
+            connection.query(
+                'INSERT INTO tasks (task_title, due_date, note, company_id, user_id, ordernum) VALUES (?, ? , ?, ?, ?, ?)',
+                [req.body.taskTitle, res.locals.dueDate, req.body.note, req.params.companyId, req.session.userId, req.body.orderNum],
+                (error, results) => {
+                    if(error) {
+                        console.log(error.stack);
+                        req.flash('error', 'タスクの追加に失敗しました');
+                        res.redirect('/home');
+                    }else{
+                        req.flash('success', `タスク：${req.body.taskTitle}を追加`);
+                        res.redirect(`/newtasks/${req.params.companyId}`);
+                    }
+                }
+            );    
+        }else{
+            req.flash('error', 'タスク内容を記入してください。');
+            res.redirect(req.originalUrl);
+        }
     },
     getProgressPage: (req, res) => {
         connection.query(
@@ -328,24 +338,29 @@ module.exports = {
         );
     },
     addTask: (req, res) => {
-        if(req.body.dueDate === ''){
-            res.locals.dueDate = '期日未設定';
-        }else{
-            res.locals.dueDate = req.body.dueDate;
-        }
-        connection.query(
-            'INSERT INTO tasks (task_title, due_date, note, company_id, user_id, ordernum) VALUES (?, ?, ?, ?, ?, ?)',
-            [req.body.taskTitle, res.locals.dueDate, req.body.note, req.params.companyId, req.session.userId, req.body.orderNum],
-            (error, results) => {
-                if(error){
-                    console.log(error.stack);
-                    req.flash('error', 'タスクの追加に失敗しました');
-                }else{
-                    req.flash('success', `タスク：${req.body.taskTitle}を追加しました`);
-                }
-                res.redirect(`/progress/${req.params.companyId}`);
+        if(req.body.taskTitle !== ''){
+            if(req.body.dueDate === ''){
+                res.locals.dueDate = '期日未設定';
+            }else{
+                res.locals.dueDate = req.body.dueDate.replace('T', '　');
             }
-        );
+            connection.query(
+                'INSERT INTO tasks (task_title, due_date, note, company_id, user_id, ordernum) VALUES (?, ?, ?, ?, ?, ?)',
+                [req.body.taskTitle, res.locals.dueDate, req.body.note, req.params.companyId, req.session.userId, req.body.orderNum],
+                (error, results) => {
+                    if(error){
+                        console.log(error.stack);
+                        req.flash('error', 'タスクの追加に失敗しました');
+                    }else{
+                        req.flash('success', `タスク：${req.body.taskTitle}を追加しました`);
+                    }
+                    res.redirect(`/progress/${req.params.companyId}`);
+                }
+            );
+        }else{
+            req.flash('error', 'タスク内容を記入してください。');
+            res.redirect(`/progress/${req.params.companyId}`);
+        }
     },
     getEditTaskPage: (req, res) => {
         connection.query(
@@ -446,63 +461,67 @@ module.exports = {
             }
         );
     },
-    modifyUsername: (req, res) => {
-        connection.query(
-            'SELECT username FROM users WHERE username = ?',
-            [req.body.username],
-            (error, results) => {
-                if(error){
-                    console.log(error.stack);
-                    req.flash('error', '何らかのエラーにより、ユーザーネームの変更は行われませんでした');
-                }else if(results.length >= 1){
-                    console.log(results);
-                    req.flash('error', 'すでに同じ名前のユーザーがいます。他のユーザーと同じユーザーネームは使用できません');
-                }else{
-                    connection.query(
-                        'UPDATE users SET username = ? WHERE user_id = ?',
-                        [req.body.username, req.session.userId],
-                        (error, results) => {
-                            if(error){
-                                console.log(error.stack);
-                                req.flash('error', '何らかのエラーによりユーザーネームの変更は行われませんでした');
-                            }else{
-                                console.log(results);
-                                req.flash('success', 'ユーザーネームを変更しました。');
+    changeUsername: (req, res) => {
+        if(req.body.username !== ''){
+            connection.query(
+                'SELECT username FROM users WHERE username = ?',
+                [req.body.username],
+                (error, results) => {
+                    if(error){
+                        console.log(error.stack);
+                        req.flash('error', '何らかのエラーにより、ユーザーネームの変更は行われませんでした');
+                    }else if(results.length >= 1){
+                        console.log(results);
+                        req.flash('error', 'すでに同じ名前のユーザーがいます。他のユーザーと同じユーザーネームは使用できません');
+                    }else{
+                        connection.query(
+                            'UPDATE users SET username = ? WHERE user_id = ?',
+                            [req.body.username, req.session.userId],
+                            (error, results) => {
+                                if(error){
+                                    console.log(error.stack);
+                                    req.flash('error', '何らかのエラーによりユーザーネームの変更は行われませんでした');
+                                }else{
+                                    console.log(results);
+                                    req.flash('success', 'ユーザーネームを変更しました。');
+                                }
                             }
-                        }
-                    );
+                        );
+                    }
                 }
-                res.redirect('/config');
-            }
-        );
-    },
-    modifyPassword: (req, res) => {
-        if(req.body.password === ''){
-            req.flash('error', '空文字はつかえません');
-            res.redirect('/config');
-        }
-        if(req.body.password === req.body.passwordCheck){
-            bcrypt.hash(req.body.password, 5, (error, hash) => {
-                if(error){
-                    console.log(error.stack);
-                    req.flash('error', 'パスワードのハッシュ化でエラーが生じました。');
-                }else{
-                    connection.query(
-                        'UPDATE users SET password = ? WHERE user_id = ?',
-                        [hash, req.session.userId],
-                        (error, results) => {
-                            if(error){
-                                console.log(error.stack);
-                                req.flash('error', 'パスワード更新でエラーが生じました。');
-                            }else{
-                                req.flash('success', 'パスワードを更新しました。');
-                            }
-                        }
-                    );
-                }
-            });
+            );
         }else{
-            req.flash('error', '新パスワードと確認パスワードが一致しませんでした。もう一度お試しください。');
+            req.flash('error', 'ユーザーネームを記入してください。');
+        }
+        res.redirect('/config');
+    },
+    changePassword: (req, res) => {
+        if(req.body.password !== ''){
+            if(req.body.password === req.body.passwordCheck){
+                bcrypt.hash(req.body.password, 5, (error, hash) => {
+                    if(error){
+                        console.log(error.stack);
+                        req.flash('error', 'パスワードのハッシュ化でエラーが生じました。');
+                    }else{
+                        connection.query(
+                            'UPDATE users SET password = ? WHERE user_id = ?',
+                            [hash, req.session.userId],
+                            (error, results) => {
+                                if(error){
+                                    console.log(error.stack);
+                                    req.flash('error', 'パスワード更新でエラーが生じました。');
+                                }else{
+                                    req.flash('success', 'パスワードを更新しました。');
+                                }
+                            }
+                        );
+                    }
+                });
+            }else{
+                req.flash('error', '新パスワードと確認パスワードが一致しませんでした。もう一度お試しください。');
+            }
+        }else{
+            req.flash('error', 'パスワードを入力してください。');
         }
         res.redirect('/config');
     },
