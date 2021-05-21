@@ -10,12 +10,12 @@
         <p>セキュリティ上の理由で表示していません。</p>
     </div>
     <div class="user_info_modify">
-        <form action="/modifyusername?_method=PUT" method="POST" data-title="ユーザーネーム" onsubmit="return beforeSubmit()">
+        <form action="/changeusername?_method=PUT" method="POST" data-title="ユーザーネーム" onsubmit="return beforeSubmit()">
             <h2>ユーザーネーム変更</h2>
             <input id="usernameInput" type="text" name="username" placeholder="新ユーザーネーム" required>
             <button type="submit">変更する</button>
         </form>
-        <form action="/modifypassword?_method=PUT" method="POST" data-title="パスワード" onsubmit="return beforeSubmit()"> 
+        <form action="/changepassword?_method=PUT" method="POST" data-title="パスワード" onsubmit="return beforeSubmit()"> 
             <h2>パスワード変更</h2>
             <input id="passwordInput" type="password" name="password" placeholder="新パスワード" required>
             <input id="passwordCheckInput" type="password" name="passwordCheck" placeholder="確認用パスワード（同じパスワードを入力）" required>

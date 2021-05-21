@@ -3,9 +3,11 @@
 </div>
 <div class="form_area">
     <form action="/signup" method="POST">
-        <input type="text" name="username" placeholder="ユーザーネーム" required>
-        <input type="password" name="password" placeholder="パスワード" required>
-        <input type="submit" value="登録">
+        <label for="username">登録するユーザーネーム：</label>
+        <input type="text" name="username" placeholder="ユーザーネーム" required><br>
+        <label for="password">登録するパスワード：</label>
+        <input type="password" name="password" placeholder="パスワード" required><br>
+        <button type="submit">登録</button>
     </form>
 </div>
 <div class="button_area">

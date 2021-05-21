@@ -4,7 +4,7 @@
 <div class="form_area">
     <form action="/changecompanyname/<%= locals.companyId %>" method="POST">
         <label for="companyName">企業名</label>
-        <input type="text" name="companyName" placeholder="企業名を入力" value="<%= locals.companyName %>">
+        <input type="text" name="companyName" placeholder="企業名を入力" value="<%= locals.companyName %>" required><br>
         <button type="submit">変更</button>
     </form>
 </div>

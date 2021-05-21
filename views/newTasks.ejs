@@ -5,19 +5,24 @@
 <% if(locals.tasks){ %>
     <% locals.tasks.forEach((task) => { %>
         <div class="task_container">
-            <div class="task_display_area">
-                <div class="task_contents box_template uncompleted">
-                    <div class="task_header">
-                        <h1><%= task.ordernum %>: <%= task.task_title %></h1>
-                        <span><%= task.note %></span>
+            <div class="task_display_area box_template uncompleted">
+                    <div class="task_contents">   
+                        <div class="task_header">
+                            <h1><%= task.ordernum %>: <%= task.task_title %></h1>
+                            <span><%= task.note %></span>
+                        </div>
+                        <div class="due_date">
+                            <span>
+                                期日：<br>
+                                <%= task.due_date %>
+                            </span>
+                        </div>
+                        <div class="iscompleted">
+                            <span>進捗：<br>
+                                <%= task.completed %>
+                            </span>
+                        </div>
                     </div>
-                    <div class="due_date">
-                        <span><%= task.due_date %></span>
-                    </div>
-                    <div class="iscompleted">
-                        <span><%= task.completed %></span>                    
-                    </div>
-                </div>
             </div>
             <div class="button_area">
                 <a href="/deletenewtask/<%= task.company_id %>/<%= task.task_id %>?_method=DELETE"><button><%= task.task_title %>を削除</button></a>    
@@ -27,9 +32,12 @@
 <% } %>
 <div class="form_area">
     <form action="/newtasks/<%= locals.companyId %>" method="POST">
-        <input type="text" name="taskTitle" placeholder="選考内容（必須）" required>
-        <input type="datetime-local" name="dueDate">
-        <textarea name="note" placeholder="備考" rows="5"></textarea>
+        <label for="taskTitle">タスク内容：</label>
+        <input type="text" name="taskTitle" placeholder="タスク内容（必須）" required><br>
+        <label for="dueDate">期日・締め切り</label>
+        <input type="datetime-local" name="dueDate"><br>
+        <label for="note">備考・メモ：</label>
+        <textarea name="note" placeholder="備考・メモ" cols="25" rows="8"></textarea><br>
         <label for="orderNum">優先度・順番</label>
         <select name="orderNum">
             <option>1</option>
@@ -42,7 +50,7 @@
             <option>8</option>
             <option>9</option>
             <option>10</option>
-        </select>
+        </select><br>
         <button type="submit">タスクを追加</button>
     </form>
 </div>
