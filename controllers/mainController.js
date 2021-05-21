@@ -1,10 +1,10 @@
 //データベースの接続
 const mysql = require('mysql');
 const dbConfig = {
-    host: /*'us-cdbr-east-03.cleardb.com' || */'localhost',
+    host: 'us-cdbr-east-03.cleardb.com' || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'Tomorrow79',
-    database: /*'heroku_9153d210a1d5aa6' || */'recruit_taskmanager'
+    password: process.env.DB_PASSWORD,
+    database: 'heroku_9153d210a1d5aa6' || 'recruit_taskmanager'
 };
 
 let connection;
