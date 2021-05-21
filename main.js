@@ -7,7 +7,7 @@ const errorController = require('./controllers/errorController');
 //セッションの設定
 const session = require('express-session');
 app.use(session({
-    secret:  process.env.SECRET_KEY,
+    secret:  process.env.SECRET_KEY || 'my_secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -97,8 +97,8 @@ app.get('/alltasks', mainController.getAllTasksPage);
 
 //設定
 app.get('/config', mainController.getConfigPage);
-app.put('/modifyusername', mainController.modifyUsername);
-app.put('/modifypassword', mainController.modifyPassword);
+app.put('/changeusername', mainController.changeUsername);
+app.put('/changepassword', mainController.changePassword);
 
 //ログアウト
 app.get('/logout', mainController.logout);
