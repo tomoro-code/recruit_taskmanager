@@ -1,10 +1,10 @@
 //データベースの接続
 const mysql = require('mysql');
 const dbConfig = {
-    host: 'us-cdbr-east-03.cleardb.com' || 'localhost',
+    host: /*'us-cdbr-east-03.cleardb.com' || */'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD,
-    database: 'heroku_9153d210a1d5aa6' || 'recruit_taskmanager'
+    password: process.env.DB_PASSWORD ||  'Tomorrow79',
+    database: /*'heroku_9153d210a1d5aa6' || */'recruit_taskmanager'
 };
 
 let connection;
@@ -168,6 +168,9 @@ module.exports = {
                     console.log(error.stack);
                     req.flash('error', 'エラーが生じました');
                     res.redirect('/home');
+                }else if(results.length === 0){
+                    req.flash('error', 'そのデータにはアクセスできません。');
+                    res.redirect('/home');
                 }else{
                     res.locals.companyName = results[0].company_name;
                     res.locals.companyId = results[0].company_id;
@@ -226,6 +229,9 @@ module.exports = {
                     console.log(error.stack);
                     req.flash('error', 'エラーが生じました');
                     res.redirect('/home');
+                }else if(results.length === 0){
+                    req.flash('error', 'そのデータにはアクセスできません。');
+                    res.redirect('/home');
                 }else{
                     res.locals.companyName = results[0].company_name;
                     res.locals.companyId = results[0].company_id;
@@ -269,6 +275,9 @@ module.exports = {
                     console.log(error.stack);
                     req.flash('error', 'ページの取得に失敗しました');
                     res.redirect(`/progress/${req.params.companyId}`);
+                }else if(results.length === 0){
+                    req.flash('error', 'そのデータにはアクセスできません。');
+                    res.redirect('/home');
                 }else{
                     res.locals.companyId = results[0].company_id;
                     res.locals.companyName = results[0].company_name;
@@ -371,6 +380,9 @@ module.exports = {
                     console.log(error.stack);
                     req.flash('error', 'ページの取得に失敗しました');
                     res.redirect(`/${req.query.from}`);
+                }else if(results.length === 0){
+                    req.flash('error', 'そのデータにはアクセスできません。');
+                    res.redirect('/home');
                 }else{
                     res.locals.taskId = results[0].task_id;
                     res.locals.taskTitle = results[0].task_title;
