@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const dbConfig = {
     host: 'us-cdbr-east-03.cleardb.com' || 'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD ||  'Tomorrow79',
+    password: process.env.DB_PASSWORD,
     database: 'heroku_9153d210a1d5aa6' || 'recruit_taskmanager'
 };
 
@@ -222,7 +222,7 @@ module.exports = {
     },
     getProgressPage: (req, res) => {
         connection.query(
-            'SELECT * FROM companies WHERE company_id = ? AND user_id = ?',
+            'SELECT * FROM tasks JOIN companies ON tasks.company_id = companies.company_id WHERE companies.company_id = ? AND companies.user_id = ? ORDER BY tasks.ordernum, tasks.due_date',
             [req.params.companyId, req.session.userId],
             (error, results) => {
                 if(error){
@@ -235,23 +235,11 @@ module.exports = {
                 }else{
                     res.locals.companyName = results[0].company_name;
                     res.locals.companyId = results[0].company_id;
-                }
-            }
-        );
-        connection.query(
-            'SELECT * FROM tasks WHERE company_id = ? AND user_id = ? ORDER BY ordernum, due_date',
-            [req.params.companyId, req.session.userId],
-            (error, results) => {
-                if(error) {
-                    console.log(error.stack);
-                    req.flash('error', 'エラーが生じました');
-                    res.redirect('/home');
-                }else{
                     res.locals.tasks = results;
                     res.render('progress');
                 }
             }
-        ); 
+        );
     },
     deleteNewTask: (req, res) => {
         connection.query(
@@ -450,7 +438,6 @@ module.exports = {
                     req.session('error', 'タスクの取得に失敗しました');
                     res.redirect('/home');
                 }else{
-                    console.log(results);
                     res.locals.tasks = results;
                     res.render('allTasks');
                 }

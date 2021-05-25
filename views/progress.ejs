@@ -4,51 +4,14 @@
         <a href="/progress/editcompanyname/<%= locals.companyId %>">
             <button>企業名を編集</button>
         </a>
-        <!--<a href="/deletealldata/<%= locals.companyId %>?_method=DELETE"> -->
-            <button id="deleteButton" data-path="/deletealldata/<%= locals.companyId %>?_method=DELETE">選考内容を含むこの企業のデータを全て消去</button>
-        <!--</a>-->
+        <button id="deleteButton" data-path="/deletealldata/<%= locals.companyId %>?_method=DELETE">選考内容を含むこの企業のデータを全て消去</button>
     </div>
 </div>
 <div class="guide_area">
     <span>タスクをクリックすることで完了/未完了を切り替えられます。</span><br>
-    <span class="complete_color">　　</span><span>：完了済み　　</span><span class="uncomplete_color">　　</span><span>：未完了　　</span>
 </div>
 <% if(locals.tasks.length >= 1){ %>
-    <% locals.tasks.forEach((task) => { %>
-        <div class="task_container">
-            <% if(task.completed === '完了！'){ %>
-                <div class="task_display_area box_template completed">   
-                    <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT"> 
-                        <div class="task_contents">
-            <% }else{ %>
-                <div class="task_display_area box_template uncompleted">
-                    <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=PUT">    
-                        <div class="task_contents">
-            <% } %>      
-                            <div class="task_header">
-                                <h1><%= task.ordernum %>: <%= task.task_title %></h1>
-                                <span><%= task.note %></span>
-                            </div>
-                            <div class="due_date">
-                                <span>
-                                    期日：<br>
-                                    <%= task.due_date %>
-                                </span>
-                            </div>
-                            <div class="iscompleted">
-                                <span>進捗：<br>
-                                    <%= task.completed %>
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="button_area">
-                    <a href="/editTask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>"><button>この項目を編集</button></a>
-                    <a href="/deletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=DELETE"><button>この項目を削除</button></a>
-                </div>
-        </div>
-    <% }); %>
+    <%- include('./partials/task', {from: 'progress/' + locals.tasks[0].company_id}); %>
 <% }else{ %>
     <h1 class="guide_h1">登録されたタスクがありません。</h1>
 <% } %> 

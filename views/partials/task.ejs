@@ -1,0 +1,36 @@
+<% locals.tasks.forEach((task) => { %>
+    <div class="task_container">
+        <div class="task_display_area box_template">   
+        <% if(task.completed === '完了！'){ %>
+            <a href="/uncompletetask/<%= task.company_id %>/<%= task.task_id %>?from=<%= from %>&_method=PUT"> 
+                <div class="task_contents">
+                    <div class="iscompleted">
+                        <img src="/image/checked.png">
+                    </div>
+        <% }else{ %>
+            <a href="/completetask/<%= task.company_id %>/<%= task.task_id %>?from=<%= from %>&_method=PUT">    
+                <div class="task_contents">
+                    <div class="iscompleted">
+                        <img src="/image/blankbox.png">
+                    </div>            
+        <% } %>  
+                    <div class="task_header">
+                        <span><%= task.company_name %></span>
+                        <h1><%= task.ordernum %>: <%= task.task_title %></h1>
+                        <span><%= task.note %></span>
+                    </div>
+                    <div class="due_date">
+                        <span>
+                            期日：<br>
+                            <%= task.due_date %>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="button_area">
+                <a href="/editTask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>"><button>この項目を編集</button></a>
+                <a href="/deletetask/<%= task.company_id %>/<%= task.task_id %>?from=progress/<%= task.company_id %>&_method=DELETE"><button>この項目を削除</button></a>
+        </div>
+    </div>
+<% }); %>
