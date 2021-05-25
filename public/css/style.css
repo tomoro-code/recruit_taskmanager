@@ -2,16 +2,18 @@
 
 body{
     margin: 0;
-    background-color: white;  
+    background-image: url('../image/bgImg_3.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
 a{
     text-decoration: none;
 }
 
 button{
-    border: #add8e6 solid 1px;
+    border: black solid 1px;
     border-radius: 10px;
-    color: #add8e6;
+    color: black;
     background-color: white;
 }
 input{
@@ -22,29 +24,32 @@ li{
 }
 
 input, textarea, select{
-    border: #add8e6 1px solid;
+    border: black 1px solid;
 }
 
 .box_template{
-    width: 60%;
-    border: #add8e6 3px solid;
+    width: 75%;
+    border: black 3px solid;
     border-radius: 20px;
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .page_title{
-    color: #add8e6;
-    text-decoration: underline;
+    color: black;
     text-align: center;
-    margin: 0;
-    margin: 92px 0 50px;
+    width: 55%;
+    margin: 92px auto 50px;
+    background-color: rgb(255, 255, 255, 0.7);
+    border: black 3px solid;
+    border-radius: 20px;
 }
 
 .form_area{
-    color: #add8e6;
     text-align: center;
     width: 60%;
     margin: 0 auto 30px;
-    border: #add8e6 2px solid;
+    background-color: rgb(255, 255, 255, 0.7);
+    border: black 2px solid;
     border-radius: 20px;
 }
 
@@ -53,7 +58,7 @@ input, textarea, select{
 }
 
 .mouseover{
-    background-color: #add8e6;
+    background-color: #cc7c74;
     color: white;
 }
 .mouseover h1{
@@ -63,20 +68,20 @@ input, textarea, select{
 .guide_area{
     text-align: center;
     margin: 0 0 20px;
-    color: #add8e6;
+    color: black;
 }
 .complete_color{
-    background-color: #add8e6;
+    background-color: black;
     width: 12px;
 }
 .uncomplete_color{
     background-color: white;
-    border: #add8e6 0.5px solid;
+    border: black 0.5px solid;
     width: 12px;
 }
 
 .guide_h1, .guide_h1 a{
-    color: #add8e6;
+    color: black;
     text-align: center;
 }
 
@@ -84,7 +89,7 @@ input, textarea, select{
 header{
     display: flex;
     justify-content: space-between;
-    background-color: #add8e6;
+    background-color: #cc7c74;
     width: 100%;
     height: 56px;
     position: fixed; top: 0; left: 0;
@@ -113,7 +118,7 @@ header span{
 .menu_item{
     text-align: center;
     color: white;
-    background-color: #add8e6;
+    background-color: #cc7c74;
     flex-basis: 30%;
     border-radius: 20px;
 }
@@ -132,17 +137,21 @@ header span{
     transition: height .5s;
 }
 .flash_area{
-    background-color: white;
-    color: #add8e6;
+    color: black;
     margin: 92px 0 0;
 }
 
 /* topページ */
 .instruction{
     text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    border: black 2px solid;
+    border-radius: 15px;
 }
 .instruction p{
-    color: #add8e6;
+    color: black;
 }
 .how_to_use h1{
     text-align: center;
@@ -152,8 +161,9 @@ header span{
     width: 60%;
     overflow: hidden;
     margin: 0 auto 20px;
-    border: #add8e6 2px solid;
+    border: black 2px solid;
     border-radius: 15px;
+    background-color: white;
 }
 
 .steps h2{
@@ -170,24 +180,10 @@ header span{
 }
 .company_name{
     margin: 0;
-    color: #add8e6;
+    color: black;
 }
 
 /* progressページ newtasksページ */
-.completed{
-    background-color: #add8e6;
-    color: white;
-}
-.completed a{
-    color: white;
-}
-.uncompleted{
-    background-color: white;
-    color: #add8e6;
-}
-.uncompleted a{
-    color: #add8e6;
-}
 
 .task_container{
     margin-bottom: 100px;
@@ -195,20 +191,28 @@ header span{
 .task_display_area{
     margin: 0 auto;
 }
+.task_display_area a{
+    color: black;
+}
 .task_contents{
     display: flex;
     justify-content: space-between;
 }
+.iscompleted{
+    flex-basis: 15%;
+    text-align: center;
+    padding: 25px 0;
+}
+.iscompleted img{
+    width: 65%;
+}
 .task_header{
-    flex-basis: 50%;
+    flex-basis: 55%;
     overflow: auto;
 }
 
 .due_date{
     flex-basis: 30%;
-}
-.iscompleted{
-    flex-basis: 20%;
 }
 
 .return_area{
@@ -219,7 +223,7 @@ header span{
 /*configページ*/
 .config_title{
     text-align: center;
-    color: #add8e6;
+    color: black;
 }
 .user_info{
     display: flex;
