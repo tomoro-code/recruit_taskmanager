@@ -1,0 +1,25 @@
+<div class="form_area">
+    <h2>タスクを追加</h2>
+    <form action="/<%= actionPath %>/<%= locals.companyId %>" method="POST">
+        <label for="taskTitle">タスク内容</label>
+        <input type="text" name="taskTitle" placeholder="タスク内容（必須）" required><br>
+        <label for="dueDate">期日・締め切り</label>
+        <input type="datetime-local" name="dueDate"><br>
+        <label for="note">備考・メモ</label>
+        <textarea name="note" placeholder="備考" cols="25" rows="8"></textarea><br>
+        <label for="orderNum">優先度・順番</label>
+        <select name="orderNum">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+        </select><br>
+        <button type="submit">タスクを追加</button>
+    </form>
+</div>
