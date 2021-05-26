@@ -1,10 +1,10 @@
 //データベースの接続
 const mysql = require('mysql');
 const dbConfig = {
-    host: 'us-cdbr-east-03.cleardb.com' || 'localhost',
+    host: /*'us-cdbr-east-03.cleardb.com' || */'localhost',
     user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD,
-    database: 'heroku_9153d210a1d5aa6' || 'recruit_taskmanager'
+    password: process.env.DB_PASSWORD || 'Tomorrow79',
+    database: /*'heroku_9153d210a1d5aa6' || */'recruit_taskmanager'
 };
 
 let connection;
@@ -222,19 +222,31 @@ module.exports = {
     },
     getProgressPage: (req, res) => {
         connection.query(
-            'SELECT * FROM tasks JOIN companies ON tasks.company_id = companies.company_id WHERE companies.company_id = ? AND companies.user_id = ? ORDER BY tasks.ordernum, tasks.due_date',
+            'SELECT * FROM companies WHERE company_id = ? AND user_id = ?',
             [req.params.companyId, req.session.userId],
             (error, results) => {
                 if(error){
                     console.log(error.stack);
-                    req.flash('error', 'エラーが生じました');
+                    req.flash('error', 'エラーが生じました。');
                     res.redirect('/home');
                 }else if(results.length === 0){
-                    req.flash('error', 'そのデータにはアクセスできません。');
+                    req.flash('error', '登録していない会社です。');
                     res.redirect('/home');
                 }else{
                     res.locals.companyName = results[0].company_name;
                     res.locals.companyId = results[0].company_id;
+                }
+            }
+        );
+        connection.query(
+            'SELECT * FROM tasks WHERE company_id = ? AND user_id = ? ORDER BY ordernum, due_date',
+            [req.params.companyId, req.session.userId],
+            (error, results) => {
+                if(error){
+                    console.log(error.stack);
+                    req.flash('error', 'エラーが生じました。');
+                    res.redirect('/home');
+                }else{
                     res.locals.tasks = results;
                     res.render('progress');
                 }
