@@ -163,7 +163,7 @@ header span{
     margin: 0 auto 20px;
     border: black 2px solid;
     border-radius: 15px;
-    background-color: white;
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .steps h2{
@@ -237,6 +237,9 @@ header span{
 }
 
 @media  screen and (max-width: 599px) {
+    body{
+        background-size: contain;
+    }
     h1, p{
         font-size: 1em;
     }
@@ -256,6 +259,11 @@ header span{
     .open{
         height: 38px;
         border-radius: 10px;
+    }
+
+    /* top */
+    .steps{
+        width: 80%;
     }
 
     /* config */
