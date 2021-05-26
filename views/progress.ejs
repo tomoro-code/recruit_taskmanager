@@ -1,16 +1,16 @@
 <div class="page_title">
     <h1 class="company_name"><%= locals.companyName %></h1>
-    <div class="button_area">
-        <a href="/progress/editcompanyname/<%= locals.companyId %>">
-            <button>企業名を編集</button>
-        </a>
-        <button id="deleteButton" data-path="/deletealldata/<%= locals.companyId %>?_method=DELETE">選考内容を含むこの企業のデータを全て消去</button>
-    </div>
 </div>
-<div class="guide_area">
-    <span>タスクをクリックすることで完了/未完了を切り替えられます。</span><br>
+<div class="button_area">
+    <a href="/progress/editcompanyname/<%= locals.companyId %>">
+        <button>企業名を編集</button>
+    </a>
+    <button id="deleteButton" data-path="/deletealldata/<%= locals.companyId %>?_method=DELETE">選考内容を含むこの企業のデータを全て消去</button>
 </div>
 <% if(locals.tasks.length >= 1){ %>
+    <div class="guide_area">
+        <span>タスクをクリックすることで完了/未完了を切り替えられます。</span><br>
+    </div>
     <%- include('./partials/task', {from: 'progress/' + locals.tasks[0].company_id}); %>
 <% }else{ %>
     <h1 class="guide_h1">登録されたタスクがありません。</h1>

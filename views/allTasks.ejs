@@ -1,10 +1,10 @@
 <div class="page_title">
     <h1><%= locals.username %>さんの全タスク</h1>
 </div>
-<div class="guide_area">
-    <span>タスクをクリックすることで完了/未完了を切り替えられます。</span><br>
-</div>
 <% if(locals.tasks.length >= 1){ %>
+    <div class="guide_area">
+        <span>タスクをクリックすることで完了/未完了を切り替えられます。</span><br>
+    </div>
     <%- include('./partials/task', {from: 'alltasks'}) %>
 <% }else{ %>
     <h1 class="guide_h1">登録されたタスクがありません。→<a href="/newcompany">こちら</a>←から登録できます。</h1>
